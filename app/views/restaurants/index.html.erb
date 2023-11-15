@@ -1,8 +1,21 @@
+<%= render "navbar" %>
 <div class="container">
   <h1>Restaurants</h1>
-  <div class="card">
+  <div class="d-flex flex-wrap gap-4 justify-content-between card-container">
     <% @restaurants.each do |restaurant| %>
-      <p>restaurant</p>
+      <div class="card mb-3 w-49">
+        <%= link_to restaurant_path(restaurant) do %>
+          <h3><%= restaurant.name %></h3>
+        <% end %>
+        <div class="actions">
+          <%= link_to "Edit", edit_restaurant_path(restaurant) %>
+          <%= link_to "Delete",
+            restaurant_path(restaurant),
+            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+          %>
+        </div>
+        <p><%= restaurant.address %></p>
+      </div>
     <% end %>
   </div>
 </div>

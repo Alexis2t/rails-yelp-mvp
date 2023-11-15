@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="mb-4 mt-5"><%= @restaurant.name %></h1>
+  <%= link_to "Edit", edit_restaurant_path(@restaurant) %>
+  <%= link_to "Delete",
+    restaurant_path(@restaurant),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+  <p>Category: <%= @restaurant.category %></p>
+  <p>Address: <%= @restaurant.address %></p>
+  <p>Phone number: <%= @restaurant.phone_number %></p>
+
+  <% @restaurant.reviews.each do |review| %>
+    <div class="card mb-3">
+      <p>Rating: <%= review.rating %></p>
+      <p><%= review.content %></p>
+    </div>
+  <% end %>
+  <%= link_to "Add a review", new_restaurant_review_path(@restaurant) %>
+
+  <%= link_to "Back to restaurants", restaurants_path %>
+</div>
